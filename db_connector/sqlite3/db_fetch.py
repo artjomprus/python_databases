@@ -41,7 +41,7 @@ def fetch_books(
                 FROM {column+"s"}
                 WHERE {column+"_id"} = {word}
             )
-            """
+            """  # Second exercise modifications in here
             c = conn.cursor()
             c.execute(query)
             books = [row for row in c.fetchall()]
