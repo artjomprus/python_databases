@@ -1,5 +1,6 @@
 """
 PREREQUISITE: Having the books.sqlite database binary created via db_interactions.py
+`python3.10 db_connector/sqlite3/db_interactions.py`
 
 Add a new table called genres to the database.
 
