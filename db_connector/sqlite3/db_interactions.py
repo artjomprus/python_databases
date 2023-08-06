@@ -30,7 +30,17 @@ def create_tables(conn: sqlite3.Connection) -> None:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         author_id INTEGER NOT NULL,
-        FOREIGN KEY (author_id) REFERENCES authors (id)
+        genre_id INTEGER NOT NULL,
+        FOREIGN KEY (author_id) REFERENCES authors (id),
+        FOREIGN KEY (genre_id) REFERENCES genres (id)
+        )
+        """
+    )
+
+    c.execute(
+        """CREATE TABLE IF NOT EXISTS genres (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL
         )
         """
     )
@@ -46,9 +56,18 @@ def insert_data(conn: sqlite3.Connection) -> None:
     c.execute("INSERT INTO authors (name) VALUES ('Tom Clancy')")
     c.execute("INSERT INTO authors (name) VALUES ('John Grishom')")
 
-    c.execute("INSERT INTO books (title, author_id) VALUES ('The Shining', 1)")
-    c.execute("INSERT INTO books (title, author_id) VALUES ('Patriot Games', 2)")
-    c.execute("INSERT INTO books (title, author_id) VALUES ('The Firm', 3)")
+    c.execute(
+        "INSERT INTO books (title, author_id, genre_id) VALUES ('The Shining', 1, 1)"
+    )
+    c.execute(
+        "INSERT INTO books (title, author_id, genre_id) VALUES ('Patriot Games', 2, 2)"
+    )
+    c.execute(
+        "INSERT INTO books (title, author_id, genre_id) VALUES ('The Firm', 3, 2)"
+    )
+
+    c.execute("INSERT INTO genres (name) VALUES ('Horror')")
+    c.execute("INSERT INTO genres (name) VALUES ('Thriller')")
 
     conn.commit()
 
